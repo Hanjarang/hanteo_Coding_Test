@@ -74,7 +74,8 @@ class CategoryTree{
 
   /**
    * 카테고리 추가
-   * @param parenId 를 이용하여 계층 구조 유지
+   * parent_idx, child_id 관계 설정
+   * 카테고리 추가시 parent_idx ( @param parenId ) 를 이용하여 계층 구조를 형성, 유지
    * HashMap을 이용하여 O(1) 시간 복잡도로 검색 가능하도록 구성함.
    */
   public void addCategory(int id, String name, int parenId){
@@ -91,7 +92,7 @@ class CategoryTree{
 
   /**
    * 게시판 추가
-   * 공지사항은 이름이 같지만 각 다른 게시판 ID를 가지고있고
+   * 공지사항은 이름이 같지만 각각 다른 카테고리 (게시판 ID)를 가지고있고
    * 익명게시판은 동일한 게시판 ID(6)를 공유하지만 각각 다른 카테고리에 소속되어 있음.
    */
   public void addBoardToCategory(int categoryId, int boardId){
@@ -103,14 +104,14 @@ class CategoryTree{
 
   /**
    * 카테고리 검색
-   * @param categoryId 카테고리 ID를 이용해 특정 카테고리와 하위 카테고리를 검색
+   * @param categoryId ( 카테고리 ID )를 이용해 특정 카테고리와 하위 카테고리를 검색
    */
   public Category getCategory(int categoryId){
     return categoryMap.get(categoryId);
   }
 
   /**
-   * JSON 변환
+   * JSON으로 변환하여 응답
    */
   public String toJson()throws JsonProcessingException{
     ObjectMapper objectMapper = new ObjectMapper();
